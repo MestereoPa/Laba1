@@ -36,10 +36,11 @@ void deque::push(float a)
 	buf = head;
 	int choise;
 	newHead->chisl = a;
-	cout << "выберите куда добавить элемент\n1 - начало\n2 - конец" << endl;
-	cin >> choise;
 	do
 	{
+	cout << "выберите куда добавить элемент\n1 - начало\n2 - конец" << endl;
+	cin >> choise;
+	
 		if (choise == 1)
 		{
 			if (size == 0)
@@ -137,16 +138,3 @@ float deque::pop()
 		
 	} while ((choise < 1) && (choise > 2));
 };
-void deque::get()
-{
-	elem* bufHead;
-	bufHead = head;
-	cout << "количество элементов size = " << size << endl;
-	cout << "элементы : ";
-	while (bufHead != 0)
-	{
-		cout << bufHead->chisl << " ";
-		bufHead = bufHead->ptr;
-	}
-	cout << endl;
-}

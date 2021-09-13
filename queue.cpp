@@ -92,3 +92,28 @@
 		}
 		cout << endl;
 	}
+	void queue::set()
+	{
+		int length;
+		float a;
+		cout << "выберите количество элементов" << endl;
+		cin >> length;
+		for (int i = 0; i < length; i++)
+		{
+			cout << "введите элемент" << endl;
+			cin >> a;
+			elem* newHead;
+			newHead = new elem;
+			newHead->chisl = a;
+			if (size == 0)
+			{
+				newHead->ptr = 0;
+			}
+			else
+			{
+				newHead->ptr = head;
+			}
+			head = newHead;
+			size++;
+		}
+	}

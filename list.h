@@ -1,13 +1,13 @@
 #pragma once
 #include "queue.h"
-class deque :
+class list :
     public queue
 {
 public:
-	deque();
-	deque(float chisl);
-	deque(const deque& deque);
-	~deque();
+	list();
+	list(float chisl);
+	list(const list& deque);
+	~list();
 	float pop();
 	void push(float a);
 };

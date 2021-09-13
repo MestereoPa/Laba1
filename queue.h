@@ -14,7 +14,9 @@ public:
 	virtual ~queue();
 	virtual void push(float a);
 	virtual float pop();
-	virtual void get();
+	void get();
+	void set();
+
 protected:
 	elem* head = new elem;
 	int size;

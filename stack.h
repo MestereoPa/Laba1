@@ -10,6 +10,5 @@ public:
 	stack(const stack& stack);
 	~stack();
 	float pop();
-	void get();
 };
 

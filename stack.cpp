@@ -49,16 +49,3 @@ float stack::pop()
 		return 0;
 	}
 };
-void stack::get()
-{
-	elem* bufHead;
-	bufHead = head;
-	cout << "количество элементов size = " << size << endl;
-	cout << "элементы : ";
-	while (bufHead != 0)
-	{
-		cout << bufHead->chisl << " ";
-		bufHead = bufHead->ptr;
-	}
-	cout << endl;
-}
