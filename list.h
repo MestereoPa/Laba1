@@ -10,5 +10,10 @@ public:
 	~list();
 	float pop();
 	void push(float a);
+	void get();
+	void set();
+private:
+	elem* head = new elem;
+	int size;
 };
 

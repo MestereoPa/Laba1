@@ -138,3 +138,41 @@ float deque::pop()
 		
 	} while ((choise < 1) && (choise > 2));
 };
+void deque::get()
+{
+	elem* bufHead;
+	bufHead = head;
+	cout << "Количество элементов size = " << size << endl;
+	cout << "Элементы : ";
+	while (bufHead != 0)
+	{
+		cout << bufHead->chisl << " ";
+		bufHead = bufHead->ptr;
+	}
+	cout << endl;
+}
+void deque::set()
+{
+	int length;
+	float a;
+	cout << "выберите количество элементов" << endl;
+	cin >> length;
+	for (int i = 0; i < length; i++)
+	{
+		cout << "введите элемент" << endl;
+		cin >> a;
+		elem* newHead;
+		newHead = new elem;
+		newHead->chisl = a;
+		if (size == 0)
+		{
+			newHead->ptr = 0;
+		}
+		else
+		{
+			newHead->ptr = head;
+		}
+		head = newHead;
+		size++;
+	}
+}
