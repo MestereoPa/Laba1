@@ -2,7 +2,7 @@
 
 Keper::Keper()
 {
-	head->chisl = 0;
+	head->element = 0;
 	head->ptr = 0;
 	size = 0;
 	cout << "конструктор Keper " << endl;
@@ -15,7 +15,7 @@ Keper::Keper(queue *newElem)
 };
 Keper::~Keper()
 {
-	elem* bufHead;
+	elem2* bufHead;
 	for (int i = 0; i < size - 1; i++)
 	{
 		bufHead = head->ptr;
@@ -28,7 +28,7 @@ Keper::~Keper()
 
 queue* Keper::pop()
 {
-	elem* buf;
+	elem2* buf;
 	buf = head;
 	queue *a;
 	if (size > 0)
@@ -47,10 +47,11 @@ queue* Keper::pop()
 };
 queue* Keper::operator[] (const int ind)
 {
-	elem* buf = head;
+	elem2* buf = head;
 	if ((ind >= size) || (ind < 0))
 	{
 		cout << "неверный индекс" << endl;
+		return 0;
 	}
 	else
 	{
@@ -60,25 +61,114 @@ queue* Keper::operator[] (const int ind)
 		}
 		return(buf->element);
 	}
+	
+}
+void Keper::save()
+{
+	ofstream fout;
+	fout.open("keper.dat", ios_base::out);
+	if (!fout.is_open())
+	{
+		cout << "файл не открылс€" << endl;
+	}
+	else
+	{
+		fout << size << endl;
+		fout.close();
+		elem2* buf = head;
+		for (int i = 0; i < size; i++)
+		{
+			buf->element->save();
+
+		}
+	}
+	
+}
+void Keper::load()
+{
+	ifstream fin;
+	int choise;
+	int specsize;
+	string a, b, c, d;
+	queue* qe;
+	fin.open("keper.dat");
+	if (!fin.is_open())
+	{
+		cout << "файл не открылс€" << endl;
+	}
+	else
+	{
+		fin >> specsize;
+		for (int i = 0; i < specsize; i++)
+		{
+			int colvo;
+			float a;
+			fin >> choise;
+			if (choise == 1)
+			{
+				fin >> colvo;
+				deque* de;
+				de = new deque;
+				for (int i = 0; i < colvo; i++)
+				{
+					fin >> a;
+					de->push(a);
+				}
+				qe = de;
+				push(qe);
+			}
+			if (choise == 2)
+			{
+				fin >> colvo;
+				list* li;
+				li = new list;
+				for (int i = 0; i < colvo; i++)
+				{
+					fin >> a;
+					li->push(a);
+				}
+
+				qe = li;
+				push(qe);
+			}
+			if (choise == 3)
+			{
+				fin >> colvo;
+				stack* st;
+				st = new stack;
+				for (int i = 0; i < colvo; i++)
+				{
+					fin >> a;
+					st->push(a);
+				}
+
+				qe = st;
+				push(qe);
+			}
+
+		}
+
+	}
+
 }
 void Keper::get()
 {
-	elem* bufHead;
-	bufHead = head;
+	int schet = 1;
 	cout << " оличество элементов size = " << size << endl;
-	cout << "Ёлементы : ";
-	while (bufHead != 0)
+	cout << "Ёлементы : "<<endl;
+	for (int i = 0; i < size; i++)
 	{
-		cout << "___________________________________________________________";
-		bufHead->element->get();
-		bufHead = bufHead->ptr;
+		cout << "элемент номер " << schet++<<endl;
+		cout << "___________________________________________________________"<<endl;
+		(*this)[i]->get();
+		cout << "___________________________________________________________"<<endl;
 	}
 	cout << endl;
 }
 void Keper::push(queue* a)
 {
-	elem* newHead;
-	newHead = new elem;
+	elem2* newHead;
+	newHead = new elem2;
 	newHead->element = a;
 	if (size == 0)
 	{
@@ -91,3 +181,7 @@ void Keper::push(queue* a)
 	head = newHead;
 	size++;
 };
+int Keper::sizeGet()
+{
+	return size;
+}

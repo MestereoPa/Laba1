@@ -53,7 +53,7 @@ void stack::get()
 {
 	elem* bufHead;
 	bufHead = head;
-	cout << "Количество элементов size = " << size << endl;
+	cout << "Класс СТЕК\nКоличество элементов size = " << size << endl;
 	cout << "Элементы : ";
 	while (bufHead != 0)
 	{
@@ -103,3 +103,24 @@ void stack::push(float a)
 	head = newHead;
 	size++;
 };
+void stack::save()
+{
+	ofstream fout;
+	fout.open("keper.dat", ios_base::app);
+	if (!fout.is_open())
+	{
+		cout << "файл не открылсся";
+	}
+	else
+	{
+		elem* bufhead = head;
+		fout << 3 << endl << size << endl;
+		for (int i = 0; i < size; i++)
+		{
+			fout << bufhead->chisl << ' ';
+			bufhead = bufhead->ptr;
+		}
+		fout << endl;
+		fout.close();
+	}
+}

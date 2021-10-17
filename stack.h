@@ -13,6 +13,7 @@ public:
 	void get();
 	void set();
 	void push(float a);
+	void save();
 private:
 	elem* head = new elem;
 	int size;

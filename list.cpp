@@ -31,15 +31,29 @@ list::list(const list& copy)
 }
 void list::push(float a)
 {
+	elem* newHead;
+	newHead = new elem;
+	newHead->chisl = a;
+	if (size == 0)
+	{
+		newHead->ptr = 0;
+	}
+	else
+	{
+		newHead->ptr = head;
+	}
+	head = newHead;
+	size++;
+}
+void list::push(float a, int choise)
+{
 	elem* newHead, * buf;
 	newHead = new elem;
 	buf = head;
-	int choise,ind;
+	int ind;
 	newHead->chisl = a;
 	do
 	{
-		cout << "выберите место куда добавить элемент с 0 по " << size <<endl;
-		cin >> choise;
 		if ((choise >= 0) && (choise <= size))
 		{
 			ind = 0;
@@ -83,13 +97,71 @@ void list::push(float a)
 		}
 	} while ((choise < 0) && (choise > size));
 };
+float list::pop()
+{
+	elem* buf, * buf2;
+	buf2 = buf = head;
+	float a;
+	int choise, ind;
+	cout << "выберите какой элемент извлечь от 1 до "<<size<<endl;
+	cin >> choise;
+	do
+	{
+		if ((choise > 0) && (choise <= size))
+		{
+			ind = 0;
+			choise--;
+			while (ind != choise )
+			{
+				ind++;
+				buf = buf->ptr;
+			}
+			if (size == 0)
+			{
+				a = buf->chisl;
+				delete(buf);
+			}
+			else
+			{
+				if (choise == size-1)
+				{
+					a = buf->ptr->chisl;
+					delete(buf->ptr);
+					buf->ptr = 0;
+				}
+				else
+				{
+					if (choise == 0)
+					{
+						a = buf->chisl;
+						head = buf->ptr;
+						delete(buf);
+					}
+					else
+					{
+						a = buf->ptr->chisl;
+						buf2 = buf->ptr;
+						buf->ptr = buf2->ptr;
+						delete(buf2);
+					}
+				}
+			}
+			size--;
+			return a;
+		}
+		else
+		{
+			cout << "повторите ввод" << endl;
+		}
+	} while ((choise < 0) && (choise > size));
 
+}
 float list::pop(int choise)
 {
 	elem* buf, *buf2;
 	buf2 = buf = head;
 	float a;
-	int choise, ind;
+	int  ind;
 	do
 	{
 		if ((choise >= 0) && (choise <= size))
@@ -160,7 +232,7 @@ void list::get()
 {
 	elem* bufHead;
 	bufHead = head;
-	cout << "Количество элементов size = " << size << endl;
+	cout << "Класс ЛИСТ\nКоличество элементов size = " << size << endl;
 	cout << "Элементы : ";
 	while (bufHead != 0)
 	{
@@ -192,5 +264,26 @@ void list::set()
 		}
 		head = newHead;
 		size++;
+	}
+}
+void list::save()
+{
+	ofstream fout;
+	fout.open("keper.dat", ios_base::app);
+	if (!fout.is_open())
+	{
+		cout << "файл не открылсся";
+	}
+	else
+	{
+		elem* bufhead = head;
+		fout << 2 << endl << size << endl;
+		for (int i = 0; i < size; i++)
+		{
+			fout << bufhead->chisl << ' ';
+			bufhead = bufhead->ptr;
+		}
+		fout << endl;
+		fout.close();
 	}
 }

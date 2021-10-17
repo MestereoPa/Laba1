@@ -10,8 +10,10 @@ public:
 	~deque();
 	float pop();
 	void push(float a);
+	void push(float a, int choise);
 	void get();
 	void set();
+	void save();
 private:
 	elem* head = new elem;
 	int size;

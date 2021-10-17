@@ -31,16 +31,26 @@ deque::deque(const deque& copy)
 }
 void deque::push(float a)
 {
+	elem* newHead;
+	newHead = new elem;
+	newHead->chisl = a;
+	if (size == 0)
+	{
+		newHead->ptr = 0;
+	}
+	else
+	{
+		newHead->ptr = head;
+	}
+	head = newHead;
+	size++;
+}
+void deque::push(float a, int choise)
+{
 	elem* newHead, *buf;
 	newHead = new elem;
 	buf = head;
-	int choise;
 	newHead->chisl = a;
-	do
-	{
-	cout << "выберите куда добавить элемент\n1 - начало\n2 - конец" << endl;
-	cin >> choise;
-	
 		if (choise == 1)
 		{
 			if (size == 0)
@@ -80,7 +90,6 @@ void deque::push(float a)
 			}
 		}
 
-	} while ((choise < 1) && (choise > 2));
 };
 float deque::pop()
 {
@@ -142,7 +151,7 @@ void deque::get()
 {
 	elem* bufHead;
 	bufHead = head;
-	cout << "Количество элементов size = " << size << endl;
+	cout << "Класс ДЕК\nКоличество элементов size = " << size << endl;
 	cout << "Элементы : ";
 	while (bufHead != 0)
 	{
@@ -174,5 +183,26 @@ void deque::set()
 		}
 		head = newHead;
 		size++;
+	}
+}
+void deque::save()
+{
+	ofstream fout;
+	fout.open("keper.dat", ios_base::app);
+	if (!fout.is_open())
+	{
+		cout << "файл не открылсся";
+	}
+	else
+	{
+		elem* bufhead = head;
+		fout << 1 << endl << size << endl;
+		for (int i = 0; i < size; i++)
+		{
+			fout << bufhead->chisl<<' ';
+			bufhead = bufhead->ptr;
+		}
+		fout << endl;
+		fout.close();
 	}
 }
