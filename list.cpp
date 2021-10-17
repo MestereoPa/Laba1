@@ -84,7 +84,7 @@ void list::push(float a)
 	} while ((choise < 0) && (choise > size));
 };
 
-float list::pop()
+float list::pop(int choise)
 {
 	elem* buf, *buf2;
 	buf2 = buf = head;
@@ -92,8 +92,6 @@ float list::pop()
 	int choise, ind;
 	do
 	{
-		cout << "выберите какой элемент извлечь с 0 по " << size << endl;
-		cin >> choise;
 		if ((choise >= 0) && (choise <= size))
 		{
 			ind = 0;
@@ -142,6 +140,22 @@ float list::pop()
 		}
 	} while ((choise < 0) && (choise > size));
 };
+float& list::operator[] (const int index)
+{
+	elem* buf = head;
+	if ((index >= size) || (index < 0))
+	{
+		cout << "неверный индекс" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < size - index - 1; i++)
+		{
+			buf = buf->ptr;
+		}
+		return(buf->chisl);
+	}
+}
 void list::get()
 {
 	elem* bufHead;
