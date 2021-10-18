@@ -2,6 +2,7 @@
 #include "list.h"
 #include "deque.h"
 #include "Keper.h"
+void rabSklass(queue* elemee);
 int main(void)
 {
 	char choise, choise1;
@@ -58,8 +59,18 @@ int main(void)
 			}
 			break;
 		case '2':
-			Kep.get();
-			
+			if (Kep.sizeGet() == 0)
+			{
+				cout<< " нет элементов"<<endl;
+			}
+			else
+			{	
+				Kep.get();
+				cout << "с каким элементом работать введите индекс" << endl;
+				cin >> ind;
+
+				rabSklass(Kep[ind]);
+			}
 			break;
 		case '3':
 			Kep.load();
@@ -89,4 +100,40 @@ int main(void)
 		system("pause");
 	} while (choise != '0');
 
+}
+void rabSklass(queue* elemee)
+{
+	char choise;
+	float newElem;
+	setlocale(LC_ALL, "rus");
+	do 
+	{
+		system("cls");
+		cout << "выберите действия\n 1 - добавить элемент\n 2 - извлечь элемент \n 3 - вывод \n 0 - выход" << endl;
+		
+		cin >> choise;
+		cin.ignore(32767, '\n');
+		switch (choise)
+		{
+		case '1':
+			cout << "введите элемент" << endl;
+			cin >> newElem;
+			elemee->push(newElem);
+			break;
+		case '2':
+			cout << "извлеченный элемент" << endl;
+			cout << elemee->pop();
+			break;
+		case '3':
+			elemee->get();
+			break;
+		case '0':
+			break;
+		default:
+			cout << "неверны ввод";
+			break;
+		}
+		system("pause");
+
+	} while (choise != '0');
 }

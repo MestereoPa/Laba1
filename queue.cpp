@@ -8,7 +8,10 @@
 		cout << "диструктор queue " << endl;
 	};
 
-
+	float queue::pop(int ind)
+	{
+		return pop();
+	}
 
 	
 

@@ -13,6 +13,7 @@ public:
 	virtual ~queue();
 	virtual void push(float a) = 0;
 	virtual float pop() = 0;
+	virtual float pop(int ind);
 	virtual void get() = 0;
 	virtual void set() = 0;
 	virtual void save() = 0;
