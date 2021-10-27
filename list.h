@@ -9,6 +9,14 @@ public:
 	list(const list& deque);
 	~list();
 	float pop();
-	void push(float a);
+	float pop(int choise);
+	void push(float newElem);
+	void get();
+	void set();
+	void save();
+	void push();
+private:
+	elem* head = new elem;
+	int size;
 };
 
