@@ -9,8 +9,8 @@ public:
 	deque(const deque& deque);
 	~deque();
 	float pop();
-	void push(float a);
-	void push(float a, int choise);
+	void push(float newElem);
+	void push();
 	void get();
 	void set();
 	void save();

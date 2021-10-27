@@ -13,7 +13,7 @@ int main(void)
 	setlocale(LC_ALL, "rus");
 	do {
 		system("cls");
-		cout << "меню" << endl << "выбирете действие" << endl << "1 - создать новое элемент\n2 - работать с существующими\n3 - загрузить из файла\n4 - выгрузить в файл\n5 - вывод данных на экран";
+		cout << "меню" << endl << "выбирете действие" << endl << "1 - создать новый элемент\n2 - работать с уже существующими элементами\n3 - удаление элемента\n4 - загрузить из файла\n5 - выгрузить в файл\n6 - вывод данных на консоль";
 		cout << endl;
 		cin >> choise;
 		cin.ignore(32767, '\n');
@@ -38,7 +38,7 @@ int main(void)
 					list* li;
 					li = new list;
 					Ke = li;
-					li ->set();
+					li->set();
 					Kep.push(Ke);
 				}
 				else
@@ -59,37 +59,43 @@ int main(void)
 			}
 			break;
 		case '2':
-			if (Kep.sizeGet() == 0)
+
+
+			try
 			{
-				cout<< " нет элементов"<<endl;
-			}
-			else
-			{	
+				if (Kep.sizeGet() == 0)
+				{
+					throw exception("нет элементов");
+				}
 				Kep.get();
 				cout << "с каким элементом работать введите индекс" << endl;
 				cin >> ind;
-
+				ind--;
+				if (ind < 0 || ind>= Kep.sizeGet())
+				{
+					throw exception("неверный индекс");
+				}
 				rabSklass(Kep[ind]);
+			}
+			catch (const std::exception& ex)
+			{
+				cout << "Ошибка " << ex.what() << endl;
 			}
 			break;
 		case '3':
-			Kep.load();
+			Kep.get();
+			cout << "Введите индекс удаляемого элемента : ";
+			cin >> ind;
+			Kep.del(ind);
 			break;
 		case '4':
-			Kep.save();
+			Kep.load();
 			break;
 		case '5':
-			
-			cout << "Количество элементов size = " << Kep.sizeGet() << endl;
-			cout << "Элементы : " << endl;
-			for (int i = 0; i < Kep.sizeGet(); i++)
-			{
-				cout << "элемент номер " << schet++ << endl;
-				cout << "___________________________________________________________" << endl;
-				Kep[i]->get();
-				cout << "___________________________________________________________" << endl;
-			}
-			cout << endl;
+			Kep.save();
+			break;
+		case '6':
+			Kep.get();
 			break;
 		case '0':
 			break;
@@ -101,31 +107,33 @@ int main(void)
 	} while (choise != '0');
 
 }
-void rabSklass(queue* elemee)
+void rabSklass(queue* inputElem)
 {
 	char choise;
+	int a;
 	float newElem;
 	setlocale(LC_ALL, "rus");
-	do 
+	do
 	{
 		system("cls");
-		cout << "выберите действия\n 1 - добавить элемент\n 2 - извлечь элемент \n 3 - вывод \n 0 - выход" << endl;
-		
+		cout << "выберите действия\n 1 - добавить элемент\n 2 - извлечь элемент \n 3 - вывод данных на экран \n 0 - выход" << endl;
+
 		cin >> choise;
 		cin.ignore(32767, '\n');
 		switch (choise)
 		{
 		case '1':
-			cout << "введите элемент" << endl;
-			cin >> newElem;
-			elemee->push(newElem);
+			inputElem->get();
+			inputElem->push();
 			break;
 		case '2':
+			inputElem->get();
+			a = inputElem->pop();
 			cout << "извлеченный элемент" << endl;
-			cout << elemee->pop();
+			cout << a << endl;
 			break;
 		case '3':
-			elemee->get();
+			inputElem->get();
 			break;
 		case '0':
 			break;

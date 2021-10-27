@@ -10,12 +10,11 @@ public:
 	~list();
 	float pop();
 	float pop(int choise);
-	float& operator[] (const int index);
-	void push(float a);
+	void push(float newElem);
 	void get();
 	void set();
 	void save();
-	void push(float a, int choise);
+	void push();
 private:
 	elem* head = new elem;
 	int size;

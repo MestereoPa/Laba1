@@ -12,8 +12,9 @@ class Keper
 		Keper();
 		Keper(queue *newElem);
 		~Keper();
-		queue* pop();
+		void pop();
 		queue* operator[] (const int ind);
+		void del(int ind);
 		void get();
 		void push(queue* a);
 		void save();

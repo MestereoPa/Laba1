@@ -55,10 +55,14 @@ void stack::get()
 	bufHead = head;
 	cout << "Класс СТЕК\nКоличество элементов size = " << size << endl;
 	cout << "Элементы : ";
-	while (bufHead != 0)
+	for (int i = 0; i < size; i++)
 	{
+		bufHead = head;
+		for (int j = i; j < size - 1; j++)
+		{
+			bufHead = bufHead->ptr;
+		}
 		cout << bufHead->chisl << " ";
-		bufHead = bufHead->ptr;
 	}
 	cout << endl;
 }
@@ -87,11 +91,30 @@ void stack::set()
 		size++;
 	}
 }
-void stack::push(float a)
+void stack::push(float newElem)
 {
 	elem* newHead;
 	newHead = new elem;
-	newHead->chisl = a;
+	newHead->chisl = newElem;
+	if (size == 0)
+	{
+		newHead->ptr = 0;
+	}
+	else
+	{
+		newHead->ptr = head;
+	}
+	head = newHead;
+	size++;
+};
+void stack::push()
+{
+	float newElem; 
+	cout << "введите новый элемент" << endl;
+	cin >> newElem;
+	elem* newHead;
+	newHead = new elem;
+	newHead->chisl = newElem;
 	if (size == 0)
 	{
 		newHead->ptr = 0;

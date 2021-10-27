@@ -29,11 +29,11 @@ deque::deque(const deque& copy)
 		copyHead = head;
 	}
 }
-void deque::push(float a)
+void deque::push(float newElem)
 {
 	elem* newHead;
 	newHead = new elem;
-	newHead->chisl = a;
+	newHead->chisl = newElem;
 	if (size == 0)
 	{
 		newHead->ptr = 0;
@@ -45,13 +45,19 @@ void deque::push(float a)
 	head = newHead;
 	size++;
 }
-void deque::push(float a, int choise)
+void deque::push()
 {
+	float newElem;
+	int choise;
+	cout << "введите новый элемент" << endl;
+	cin >> newElem;
 	elem* newHead, *buf;
 	newHead = new elem;
 	buf = head;
-	newHead->chisl = a;
-		if (choise == 1)
+	newHead->chisl = newElem;
+	cout << "введите куда добавить элемент\n1 - в начало\n2 - в конец" << endl;
+	cin >> choise;
+		if (choise == 2)
 		{
 			if (size == 0)
 			{
@@ -66,7 +72,7 @@ void deque::push(float a, int choise)
 		}
 		else
 		{
-			if (choise == 2)
+			if (choise == 1)
 			{
 				if (size == 0)
 				{
@@ -101,7 +107,7 @@ float deque::pop()
 	cin >> choise;
 	do
 	{
-		if (choise == 1)
+		if (choise == 2)
 		{
 			if (size > 0)
 			{
@@ -119,7 +125,7 @@ float deque::pop()
 		}
 		else
 		{
-			if (choise == 2)
+			if (choise == 1)
 			{
 				if (size > 0)
 				{
@@ -153,10 +159,14 @@ void deque::get()
 	bufHead = head;
 	cout << "Класс ДЕК\nКоличество элементов size = " << size << endl;
 	cout << "Элементы : ";
-	while (bufHead != 0)
+	for (int i = 0; i < size; i++)
 	{
+		bufHead = head;
+		for (int j = i; j < size - 1; j++)
+		{
+			bufHead = bufHead->ptr;
+		}
 		cout << bufHead->chisl << " ";
-		bufHead = bufHead->ptr;
 	}
 	cout << endl;
 }

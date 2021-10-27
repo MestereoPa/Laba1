@@ -26,7 +26,7 @@ Keper::~Keper()
 	cout << "диструктор Keper " << endl;
 }
 
-queue* Keper::pop()
+void Keper::pop()
 {
 	elem2* buf;
 	buf = head;
@@ -37,12 +37,11 @@ queue* Keper::pop()
 		head = head->ptr;
 		delete(buf);
 		size--;
-		return a;
+		a->~queue();
 	}
 	else
 	{
 		cout << "Нет эллементов";
-		return 0;
 	}
 };
 queue* Keper::operator[] (const int ind)
@@ -75,10 +74,52 @@ void Keper::save()
 	{
 		fout << size << endl;
 		fout.close();
-		elem2* buf = head;
 		for (int i = 0; i < size; i++)
 		{
-			buf->element->save();
+			(*this)[i]->save();
+		}
+	}	
+}
+void Keper::del(int ind)
+{
+	elem2* buf = head, *buf2 = head;
+	if (size == 0)
+	{
+		cout << "нет элементов" << endl;
+	}
+	else
+	{
+		if (ind == size)
+		{
+			pop();
+		}
+		else
+		{
+			for (int i = 1; i < size - ind  ; i++)
+			{
+				buf = buf->ptr;
+			}
+			buf2 = buf->ptr;
+			if (ind == 1)
+			{
+				delete(buf2);
+				buf->ptr = 0;
+				size--;
+			}
+			else
+			{
+				if (ind < size || ind > 0)
+				{
+					buf2 = buf2->ptr;
+					delete(buf->ptr);
+					buf->ptr = buf2;
+					size--;
+				}
+				else
+				{
+					cout << " Нет такого элемента"<< endl;
+				}
+			}
 
 		}
 	}
@@ -145,20 +186,16 @@ void Keper::load()
 				qe = st;
 				push(qe);
 			}
-
 		}
-
 	}
-
 }
 void Keper::get()
 {
-	int schet = 1;
 	cout << "Количество элементов size = " << size << endl;
 	cout << "Элементы : "<<endl;
 	for (int i = 0; i < size; i++)
 	{
-		cout << "элемент номер " << schet++<<endl;
+		cout << "элемент номер " << i+1<<endl;
 		cout << "___________________________________________________________"<<endl;
 		(*this)[i]->get();
 		cout << "___________________________________________________________"<<endl;

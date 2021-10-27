@@ -11,7 +11,8 @@ public:
 	
 	queue();
 	virtual ~queue();
-	virtual void push(float a) = 0;
+	virtual void push() = 0;
+	virtual void push(float newElem) = 0;
 	virtual float pop() = 0;
 	virtual float pop(int ind);
 	virtual void get() = 0;
