@@ -143,6 +143,7 @@
     <ClCompile Include="Keper.cpp" />
     <ClCompile Include="Laba1.cpp" />
     <ClCompile Include="list.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="queue.cpp" />
     <ClCompile Include="stack.cpp" />
   </ItemGroup>
@@ -152,6 +153,7 @@
     <ClInclude Include="elem2.h" />
     <ClInclude Include="Keper.h" />
     <ClInclude Include="list.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="stack.h" />
   </ItemGroup>
